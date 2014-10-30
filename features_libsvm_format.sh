@@ -8,12 +8,12 @@ do
 	fi
 	
 	count=$(( `ls -1 $d | wc -l` ))
-	if [ $1 = train ]
+	if [ $1 = test ]
 	then
 		max=$count
-		min=$(( count / 2 ))
+		min=30
 	else
-		max=$(( count / 2 ))
+		max=30
 		min=0
 	fi
 	#echo $count
@@ -29,16 +29,17 @@ do
 			count=$(( count - 1 ))
 			continue
 		fi
-		#echo $count
+		# echo $count
 		count=$(( count - 1 ))
-		echo -n "$category_num"" "
 		if [ ${f##*.} != jpg ]
 		then
-			# echo "$f is not jpg" 1>&2
+			echo "$f is not jpg" 1>&2
 			continue
 		fi
+		echo -n "$category_num"" "
 		# echo "$f"
 		python caffe_script/feature.py ${f} 2> /dev/null
+		#python caffe_script/feature.py ${f}
 	done
 	category_num=$(( category_num + 1 ))
 done
