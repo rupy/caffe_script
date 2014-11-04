@@ -1,5 +1,6 @@
 category_num=0
 dir=$1
+mode=$2
 if [ ! -d "$dir" ]
 then
 	echo "$dir is not directory" 1>&2
@@ -21,7 +22,7 @@ do
 		count=60
 	fi
 
-        if [ $2 = test ]
+        if [ "$mode" = test ]
         then
                 max=$count
                 min=30
