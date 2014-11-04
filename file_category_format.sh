@@ -16,12 +16,16 @@ do
                 continue
         fi
         
+        # limit files less than or equal to 60
         count=$(( `ls -1 $d | wc -l` ))
 	if [ $count -gt 60 ]
 	then
 		count=60
 	fi
 
+        # devide files by mode
+        # use first 30 files for testing
+        # use second 30 files for training
         if [ "$mode" = test ]
         then
                 max=$count

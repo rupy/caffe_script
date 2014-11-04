@@ -8,8 +8,6 @@ then
         exit
 fi
 
-
-
 for d in "$dir"/*
 do
 	if [ ! -d "$d" ]
@@ -20,11 +18,15 @@ do
 	
 	count=$(( `ls -1 $d | wc -l` ))
 
+	# limit files less than or equal to 60
         if [ $count -gt 60 ]
         then
                 count=60
         fi
 
+	# devide files by mode
+	# use first 30 files for testing
+	# use second 30 files for training
 	if [ "$mode" = test ]
 	then
 		max=$count
