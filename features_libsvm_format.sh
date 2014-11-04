@@ -1,14 +1,30 @@
 category_num=0
-for d in 101_ObjectCategories/*
+
+dir=$1
+if [ ! -d "$dir" ]
+then
+        echo "$dir is not directory" 1>&2
+        exit
+fi
+
+
+
+for d in "$dir"/*
 do
-	if [ ! -d $d ]
+	if [ ! -d "$d" ]
 	then
 		echo "$d is not directory" 1>&2
 		continue
 	fi
 	
 	count=$(( `ls -1 $d | wc -l` ))
-	if [ $1 = test ]
+
+        if [ $count -gt 60 ]
+        then
+                count=60
+        fi
+
+	if [ $2 = test ]
 	then
 		max=$count
 		min=30
